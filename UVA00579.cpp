@@ -1,12 +1,9 @@
 #include <cstdio>
+#include <cmath>
 using namespace std;
 
-double abs(double d){
-	if(d < 0) return -d;
-	return d;
-}
 double proc(double d){
-	d = abs(d);
+	d = fabs(d);
 	if(d > 180) return 360-d;
 	return d;
 }
