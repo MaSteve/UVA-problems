@@ -1,22 +1,29 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
-int proc(int player, int a, int b) {
-	if (a % b == 0) return player;
-	int i = a/b;
-	while (i > 0) {
-		if (proc(1-player, max(a-(b*i), b), min(a-(b*i), b)) == player) return player;
-		i--;
-	}
-	return 1 - player;
+typedef long long ll;
+typedef pair<int, int> ii;
+
+int gcd(ll n, ll m) {
+    ll auxi;
+    if (m > n) {
+        auxi = n;
+        n = m, m = auxi;
+    }
+    if (n % m == 0) return 0;
+    int val = gcd(m, n%m);
+    if (n / m == 1) {
+        val = 1 - val;
+    } else val = 0;
+    return val;
 }
 
 int main() {
-	int a, b;
-	while (cin >> a >> b && !(a == 0 && b == 0)) {
-		if (proc(0, max(a, b), min(a, b))) printf("Ollie wins\n");
-		else printf("Stan wins\n");
-	}
-	return 0;
+    int n, m;
+    while (cin >> n >> m && !(n == 0 && m == 0)) {
+        int val = gcd(n, m);
+        if (val) printf("Ollie wins\n");
+        else printf("Stan wins\n");
+    }
+    return 0;
 }
